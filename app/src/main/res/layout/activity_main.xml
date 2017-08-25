@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="edu.fullsail.mgems.cse.tic_tac_toe.MainActivity">
+
+    <TextView
+        android:id="@+id/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/GameName"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_marginTop="108dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/pvptext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/PVP"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="166dp"
+        android:layout_below="@+id/Title"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/cvptext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/PVC"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="17dp"
+        android:layout_below="@+id/pvptext"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/cvctext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/CVC"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/cvptext"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/difficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DEasy"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="19dp"
+        android:layout_below="@+id/cvctext"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/credit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Credit"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_below="@+id/difficulty"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

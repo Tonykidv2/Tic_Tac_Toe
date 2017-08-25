@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="edu.fullsail.mgems.cse.tic_tac_toe.GameActivity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight=".3" />
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.3" />
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight=".3" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight=".3" />
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.3" />
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight=".3" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight=".3" />
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight="0.3" />
+
+        <edu.fullsail.mgems.cse.tic_tac_toe.DrawSurface
+            android:id="@+id/drawSurface9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_weight=".3" />
+    </LinearLayout>
+
+</LinearLayout>
