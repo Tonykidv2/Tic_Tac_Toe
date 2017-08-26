@@ -21,6 +21,7 @@ public class MinimaxAI {
             mRank = 0;
         }
     }
+
     public class GameBoard
     {
         GameActivity.DrawWhat[][] _board = new GameActivity.DrawWhat[3][3];
@@ -64,6 +65,27 @@ public class MinimaxAI {
                 }
             return false;
         }
+
+        public boolean IsWinner(GameActivity.DrawWhat _who)
+        {
+            if(_board[0][0].equals(_board[0][1]) && _board[0][2].equals(_who))
+                return true;
+            if(_board[1][0].equals(_board[1][1]) && _board[1][2].equals(_who))
+                return true;
+            if(_board[2][0].equals(_board[2][1]) && _board[2][2].equals(_who))
+                return true;
+            if(_board[0][0].equals(_board[1][0]) && _board[2][0].equals(_who))
+                return true;
+            if(_board[0][1].equals(_board[1][1]) && _board[2][1].equals(_who))
+                return true;
+            if(_board[0][2].equals(_board[1][2]) && _board[2][2].equals(_who))
+                return true;
+            if(_board[0][0].equals(_board[1][1]) && _board[2][2].equals(_who))
+                return true;
+            if(_board[0][2].equals(_board[1][1]) && _board[2][0].equals(_who))
+                return true;
+            return false;
+        }
     }
 
     public ComputerMove Run(GameActivity.DrawWhat _whosTurn, GameBoard _gameBoard, int _depth)
@@ -98,16 +120,17 @@ public class MinimaxAI {
             else
                 Moves.get(i).mRank = GetBestMove(GetNextPlayer(_whosTurn), newState, _depth - 1).mRank;
 
+            //Player 1 Value 1
             if(_whosTurn == GameActivity.DrawWhat.X)
                 if(BestMove == null || Moves.get(i).mRank > BestMove.mRank)
                     BestMove = Moves.get(i);
+
+            //Player 2 Value -1
             else
                 if (BestMove == null || Moves.get(i).mRank < BestMove.mRank)
                     BestMove = Moves.get(i);
 
         }
-
-
 
         return BestMove;
     }
@@ -115,8 +138,29 @@ public class MinimaxAI {
     private int Evaluate(GameBoard _board)
     {
         int Score = 0;
+        int NumX = 0;
+        int NumO = 0;
+        int NumNone = 0;
 
-        
+        for (int r = 0; r < 3; r++)
+            for (int c = 0; c < 3; c++)
+            {
+                if(_board._board[r][c] == GameActivity.DrawWhat.X)
+                    NumX++;
+                else if(_board._board[r][c] == GameActivity.DrawWhat.O)
+                    NumO++;
+                else if(_board._board[r][c] == GameActivity.DrawWhat.NONE)
+                    NumNone++;
+            }
+
+        Score = NumX + (NumO*-1);
+
+        //Checking to see if there is a winner at this moment
+        if(_board.IsWinner(GameActivity.DrawWhat.X))
+            Score += NumNone * 100000;
+        else if(_board.IsWinner(GameActivity.DrawWhat.O))
+            Score += NumNone * -100000;
+
         return Score;
     }
 
