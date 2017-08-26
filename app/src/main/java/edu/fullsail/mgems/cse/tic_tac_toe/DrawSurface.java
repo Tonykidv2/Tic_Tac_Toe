@@ -63,16 +63,9 @@ public class DrawSurface extends SurfaceView implements SurfaceHolder.Callback, 
         //Draw the field Here
         super.onDraw(canvas);
         canvas.drawColor(Color.WHITE);
-        /*if(mFirstTime)
-        {
-            mCircle = Bitmap.createScaledBitmap(mCircle, getWidth(),getHeight(),false);
-            mCross = Bitmap.createScaledBitmap(mCross, getWidth(),getHeight(),false);
-            mFirstTime = false;
-        }*/
+
         if(Drawthis == GameActivity.DrawWhat.X)
         {
-            int getLeftHeight= getLeft();
-            int getTop = getTop();
             canvas.drawBitmap(mCross,0,0,painter);
         }
         else if(Drawthis == GameActivity.DrawWhat.O)

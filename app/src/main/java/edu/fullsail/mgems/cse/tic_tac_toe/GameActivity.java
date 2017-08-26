@@ -59,7 +59,8 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
+    public boolean onTouch(View view, MotionEvent motionEvent)
+    {
 
         if(motionEvent.getAction() == MotionEvent.ACTION_DOWN)
         {
