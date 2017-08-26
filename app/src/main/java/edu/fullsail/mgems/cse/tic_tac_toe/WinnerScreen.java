@@ -1,0 +1,30 @@
+package edu.fullsail.mgems.cse.tic_tac_toe;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class WinnerScreen extends AppCompatActivity {
+
+    TextView mText;
+    GameActivity.Winner mWhoWon;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_winner_screen);
+
+        mText = (TextView)findViewById(R.id.WhoWon);
+
+        Bundle b = getIntent().getExtras();
+        mWhoWon = GameActivity.Winner.values()[b.getInt("Win")];
+
+        if(mWhoWon == GameActivity.Winner.X)
+            mText.setText(R.string.X);
+        else if(mWhoWon == GameActivity.Winner.O)
+            mText.setText(R.string.O);
+        else
+            mText.setText(R.string.Draw);
+
+
+    }
+}
