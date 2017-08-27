@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     int SelectDp;
     int TitleDp;
     int SubDp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
