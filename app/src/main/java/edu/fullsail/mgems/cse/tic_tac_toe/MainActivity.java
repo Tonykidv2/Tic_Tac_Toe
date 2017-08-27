@@ -3,6 +3,7 @@ package edu.fullsail.mgems.cse.tic_tac_toe;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.DimenRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     TextView pvc;
     TextView cvc;
     AlertDialog.Builder _dialog;
-
+    int SelectDp;
+    int TitleDp;
+    int SubDp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +34,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         pvp.setOnTouchListener(this);
         pvc.setOnTouchListener(this);
         cvc.setOnTouchListener(this);
-        pvp.setTextSize(30);
+        SelectDp = (int)(getResources().getDimension((R.dimen.menu_selected))/getResources().getDisplayMetrics().density);
+        pvp.setTextSize(SelectDp);
+        TitleDp = (int)(getResources().getDimension((R.dimen.menu_title))/getResources().getDisplayMetrics().density);
+        SubDp = (int)(getResources().getDimension((R.dimen.menu_subtitle))/getResources().getDisplayMetrics().density);
         findViewById(R.id.difficulty).setOnTouchListener(this);
         findViewById(R.id.Start).setOnTouchListener(this);
         findViewById(R.id.credit).setOnTouchListener(this);
@@ -98,23 +104,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         else if (view.getId() == R.id.pvptext && motionEvent.getAction() == MotionEvent.ACTION_DOWN)
         {
-            cvc.setTextSize(20);
-            pvc.setTextSize(20);
-            pvp.setTextSize(30);
+            cvc.setTextSize(SubDp);
+            pvc.setTextSize(SubDp);
+            pvp.setTextSize(SelectDp);
             currMode = GameActivity.GameMode.PVP;
         }
         else if (view.getId() == R.id.cvptext && motionEvent.getAction() == MotionEvent.ACTION_DOWN)
         {
-            cvc.setTextSize(20);
-            pvc.setTextSize(30);
-            pvp.setTextSize(20);
+            cvc.setTextSize(SubDp);
+            pvc.setTextSize(SelectDp);
+            pvp.setTextSize(SubDp);
             currMode = GameActivity.GameMode.PVC;
         }
         else if (view.getId() == R.id.cvctext && motionEvent.getAction() == MotionEvent.ACTION_DOWN)
         {
-            cvc.setTextSize(30);
-            pvc.setTextSize(20);
-            pvp.setTextSize(20);
+            cvc.setTextSize(SelectDp);
+            pvc.setTextSize(SubDp);
+            pvp.setTextSize(SubDp);
             currMode = GameActivity.GameMode.CVC;
         }
         else if (view.getId() == R.id.credit && motionEvent.getAction() == MotionEvent.ACTION_DOWN)

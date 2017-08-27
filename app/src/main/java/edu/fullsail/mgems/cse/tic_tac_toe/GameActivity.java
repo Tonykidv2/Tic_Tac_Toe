@@ -37,14 +37,14 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         O,
         DRAW
     };
+
     private ArrayList<DrawSurface> mSurfaces;
     private MinimaxAI mComputer1;
-    private MinimaxAI mComputer2;
     private MinimaxAI.GameBoard mBoard;
     private GameMode mMode;
     private Difficulty mDiff;
-    private boolean PlayerTurn;
     DrawWhat whosTurn = DrawWhat.X;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,16 +75,10 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         Bundle b = getIntent().getExtras();
         mMode = GameMode.values()[b.getInt("mode")];
         mDiff = Difficulty.values()[b.getInt("diff")];
-        if(mMode == GameMode.PVC)
+        if(mMode == GameMode.PVC || mMode == GameMode.CVC)
         {
             mComputer1 = new MinimaxAI();
         }
-        if(mMode == GameMode.CVC)
-        {
-            mComputer1 = new MinimaxAI();
-            mComputer2 = new MinimaxAI();
-        }
-
         mBoard = new MinimaxAI.GameBoard();
     }
 
@@ -101,23 +95,11 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         {
             PVCLogic(view);
         }
+        else if(motionEvent.getAction() == MotionEvent.ACTION_DOWN && mMode == GameMode.PVP)
+        {
+            PVPLogic(view, whosTurn);
+        }
 
-        if(mBoard.IsWinner(DrawWhat.O))
-        {
-            Intent i = new Intent(this, WinnerScreen.class);
-            Winner win = Winner.O;
-            i.putExtra("Win", win.ordinal());
-            startActivity(i);
-            finish();
-        }
-        if(mBoard.isDraw())
-        {
-            Intent i = new Intent(this, WinnerScreen.class);
-            Winner win = Winner.DRAW;
-            i.putExtra("Win", win.ordinal());
-            startActivity(i);
-            finish();
-        }
         return false;
     }
 
@@ -164,6 +146,22 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
             MinimaxAI.ComputerMove move = mComputer1.Run(DrawWhat.O, mBoard, mDiff);
             PlaceMove(move);
         }
+        if(mBoard.IsWinner(DrawWhat.O))
+        {
+            Intent i = new Intent(this, WinnerScreen.class);
+            Winner win = Winner.O;
+            i.putExtra("Win", win.ordinal());
+            startActivity(i);
+            finish();
+        }
+        if(mBoard.isDraw())
+        {
+            Intent i = new Intent(this, WinnerScreen.class);
+            Winner win = Winner.DRAW;
+            i.putExtra("Win", win.ordinal());
+            startActivity(i);
+            finish();
+        }
     }
 
     private void CVCLogic()
@@ -206,7 +204,68 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-    void PlaceMove(MinimaxAI.ComputerMove move)
+    private void PVPLogic(View view, DrawWhat _whosTurn)
+    {
+        for (int i = 0; i < mSurfaces.size(); i++)
+        {
+            if(view.getId() == mSurfaces.get(i).getId())
+            {
+                mSurfaces.get(i).DrawingWhat(_whosTurn);
+                mSurfaces.get(i).invalidate();
+                if(i == 0)
+                    mBoard._board[0][0] = _whosTurn;
+                else if(i == 1)
+                    mBoard._board[0][1] = _whosTurn;
+                else if(i == 2)
+                    mBoard._board[0][2] = _whosTurn;
+                else if(i == 3)
+                    mBoard._board[1][0] = _whosTurn;
+                else if(i == 4)
+                    mBoard._board[1][1] = _whosTurn;
+                else if(i == 5)
+                    mBoard._board[1][2] = _whosTurn;
+                else if(i == 6)
+                    mBoard._board[2][0] = _whosTurn;
+                else if(i == 7)
+                    mBoard._board[2][1] = _whosTurn;
+                else if(i == 8)
+                    mBoard._board[2][2] = _whosTurn;
+
+
+            }
+        }
+        if(mBoard.IsWinner(DrawWhat.O))
+        {
+            Intent i = new Intent(this, WinnerScreen.class);
+            Winner win = Winner.O;
+            i.putExtra("Win", win.ordinal());
+            startActivity(i);
+            finish();
+        }
+        if(mBoard.IsWinner(DrawWhat.X))
+        {
+            Intent i = new Intent(this, WinnerScreen.class);
+            Winner win = Winner.X;
+            i.putExtra("Win", win.ordinal());
+            startActivity(i);
+            finish();
+        }
+        if(mBoard.isDraw())
+        {
+            Intent i = new Intent(this, WinnerScreen.class);
+            Winner win = Winner.DRAW;
+            i.putExtra("Win", win.ordinal());
+            startActivity(i);
+            finish();
+        }
+
+        if(whosTurn == DrawWhat.X)
+            whosTurn = DrawWhat.O;
+        else
+            whosTurn = DrawWhat.X;
+    }
+
+    public void PlaceMove(MinimaxAI.ComputerMove move)
     {
         if(move != null) {
             if (move.mRow == 0 && move.mCollumn == 0) {
@@ -257,7 +316,7 @@ public class GameActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
-    void PlaceMove(MinimaxAI.ComputerMove move, DrawWhat _who)
+    public void PlaceMove(MinimaxAI.ComputerMove move, DrawWhat _who)
     {
         if(move != null) {
             if (move.mRow == 0 && move.mCollumn == 0) {
