@@ -1,10 +1,13 @@
 package edu.fullsail.mgems.cse.tic_tac_toe;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
-public class WinnerScreen extends AppCompatActivity {
+public class WinnerScreen extends AppCompatActivity implements View.OnTouchListener{
 
     TextView mText;
     GameActivity.Winner mWhoWon;
@@ -25,6 +28,18 @@ public class WinnerScreen extends AppCompatActivity {
         else
             mText.setText(R.string.Draw);
 
+        mText.setOnTouchListener(this);
+    }
 
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+
+        if(view.getId() == mText.getId())
+        {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+        return false;
     }
 }

@@ -99,15 +99,50 @@ public class MinimaxAI {
                 return true;
             return false;
         }
+
+        public boolean isDraw()
+        {
+            if(isTerminal())
+                if(!IsWinner(GameActivity.DrawWhat.X))
+                    if(!IsWinner(GameActivity.DrawWhat.O))
+                        return true;
+
+            return false;
+        }
+
+        public boolean isEmpty()
+        {
+            for (int r = 0; r < 3; r++)
+                for (int c = 0; c < 3; c++)
+                    if(_board[r][c] != GameActivity.DrawWhat.NONE)
+                        return false;
+
+            return true;
+        }
     }
 
     public ComputerMove Run(GameActivity.DrawWhat _whosTurn, GameBoard _gameBoard, GameActivity.Difficulty _diff)
     {
+
         ComputerMove nextMove;
+        if(_gameBoard.isEmpty())
+        {
+            Random ran = new Random();
+            while (true)
+            {
+                int r = ran.nextInt(3);
+                int c = ran.nextInt(3);
+                if(_gameBoard.isValidMove(_whosTurn,r,c))
+                {
+                    nextMove = new ComputerMove(r, c);
+                    return nextMove;
+                }
+            }
+        }
         if(_diff == GameActivity.Difficulty.MEDIUM)
-            nextMove = GetBestMove(_whosTurn, _gameBoard, 2);
+            nextMove = GetBestMove(_whosTurn, _gameBoard, 1);
         else if(_diff == GameActivity.Difficulty.HARD)
-            nextMove = GetBestMove(_whosTurn, _gameBoard, 4);
+            nextMove = GetBestMove(_whosTurn, _gameBoard, 2);
         else
         {
            Random ran = new Random();
@@ -148,13 +183,16 @@ public class MinimaxAI {
                 newState.Copy(_gameBoard);
                 newState.MakeMove(whosTurn, Moves.get(i).mRow, Moves.get(i).mCollumn);
 
-                if (_gameBoard.isTerminal() || _depth == 0)
+                if (/*_gameBoard.isTerminal() ||*/ newState.IsWinner(whosTurn) || newState.isDraw() || _depth == 0)
                 {
                     Moves.get(i).mRank = Evaluate(newState);
                 }
                 else
                 {
-                    Moves.get(i).mRank = GetBestMove(GetNextPlayer(whosTurn), newState, _depth - 1).mRank;
+                    ComputerMove move =  GetBestMove(GetNextPlayer(whosTurn), newState, _depth - 1);
+                    if(move == null)
+                        return null;
+                    Moves.get(i).mRank = move.mRank;
                 }
 
                 //Player 1 Value 1
