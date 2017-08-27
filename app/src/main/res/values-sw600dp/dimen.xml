@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="menu_title">60dp</dimen>
+    <dimen name="menu_subtitle">30dp</dimen>
+    <dimen name="menu_selected">40dp</dimen>
+</resources>

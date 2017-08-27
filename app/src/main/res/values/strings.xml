@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tic-Tac-Toe</string>
+    <string name="app_name">#Tic-Tac-Toe</string>
     <string name="GameName">Tic-Tac-Toe</string>
     <string name="Start">Start!!</string>
     <string name="PVP">Player vs. Player</string>
