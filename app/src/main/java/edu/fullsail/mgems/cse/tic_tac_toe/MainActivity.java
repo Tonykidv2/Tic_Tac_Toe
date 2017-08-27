@@ -1,6 +1,9 @@
 package edu.fullsail.mgems.cse.tic_tac_toe;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     TextView pvp;
     TextView pvc;
     TextView cvc;
+    AlertDialog.Builder _dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,26 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         pvp.setTextSize(30);
         findViewById(R.id.difficulty).setOnTouchListener(this);
         findViewById(R.id.Start).setOnTouchListener(this);
+        findViewById(R.id.credit).setOnTouchListener(this);
+        _dialog = new AlertDialog.Builder(this);
+        _dialog.setTitle("Made by");
+        _dialog.setMessage("Anthony Ramoslebron\nMGMS | APM\n8/26/2017");
+        _dialog.setPositiveButton(" OK ", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface _dialog, int id)
+            {
+                _dialog.dismiss();
+            }
+        });
+        _dialog.setNegativeButton(" Find Source Code ", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface _dialog, int id)
+            {
+                Intent _intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Tonykidv2/Tic_Tac_Toe"));
+                startActivity(_intent);
+                _dialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -92,6 +116,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             pvc.setTextSize(20);
             pvp.setTextSize(20);
             currMode = GameActivity.GameMode.CVC;
+        }
+        else if (view.getId() == R.id.credit && motionEvent.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            _dialog.show();
         }
         return false;
     }
